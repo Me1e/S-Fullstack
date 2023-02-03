@@ -1,4 +1,4 @@
-import { AWS_ADDRESS } from '@/const';
+import { API_ADDRESS, AWS_ADDRESS } from '@/const';
 import { useGenerateStore, useUserInfoStore } from '@/util/store';
 import styled from '@emotion/styled';
 import axios from 'axios';
@@ -160,12 +160,11 @@ const HorizontalLine = styled.div`
 export type Post = {
   id: number;
   imageUrl?: string;
-  image_url?: string;
   title: string;
   color: string;
   desc: string;
   caption: string;
-  like_count: number;
+  likeCount: number;
 };
 
 export type User = {
@@ -194,14 +193,14 @@ export default function Post({
     setLoading(true);
 
     axios
-      .post('/api/posts/' + post.id + '/like', {
+      .post(API_ADDRESS + '/posts/' + post.id + '/like', {
         userId: userId,
       })
       .then(() => {
         if (liked) {
-          post.like_count--;
+          post.likeCount--;
         } else {
-          post.like_count++;
+          post.likeCount++;
         }
         setLiked((prev) => !prev);
         setLoading(false);
@@ -213,11 +212,7 @@ export default function Post({
     setColor(post.color);
     setDesc(post.desc);
     setParentId(post.id);
-    if (post.image_url) {
-      setImageUrl(post.image_url);
-    } else if (post.imageUrl) {
-      setImageUrl(post.imageUrl);
-    }
+    setImageUrl(post.imageUrl);
     route.push('/generate/start');
   };
 
@@ -229,7 +224,7 @@ export default function Post({
     <Container>
       <ImageContainer>
         <Img
-          src={post.image_url ? AWS_ADDRESS + '/' + post.image_url : ''}
+          src={post.imageUrl ? AWS_ADDRESS + '/' + post.imageUrl : ''}
           alt=''
           width={400}
           height={400}
@@ -253,7 +248,7 @@ export default function Post({
           ) : (
             <OutlineFavoriteIcon color='#111A30' />
           )}
-          <FavoriteText>{post.like_count}</FavoriteText>
+          <FavoriteText>{post.likeCount}</FavoriteText>
         </LikeButton>
         <RedsignButton>
           <BrushIcon color='#fff' />

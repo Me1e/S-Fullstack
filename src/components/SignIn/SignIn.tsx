@@ -6,6 +6,7 @@ import { Input, SignInButton, SignInWrapper } from './SignIn.styles';
 import Lottie from 'lottie-react';
 import * as animationData from './animationData.json';
 import { motion } from 'framer-motion';
+import { API_ADDRESS } from '@/const';
 
 const SignIn = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const SignIn = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   const signUpRequest = async () => {
-    return fetch(`/api/users`, {
+    return fetch(`${API_ADDRESS}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

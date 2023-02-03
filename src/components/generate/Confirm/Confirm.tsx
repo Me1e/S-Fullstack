@@ -1,4 +1,4 @@
-import { AI_ADDRESS, AWS_ADDRESS } from '@/const';
+import { AI_ADDRESS, API_ADDRESS, AWS_ADDRESS } from '@/const';
 import { useGenerateStore } from '@/util/store';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -26,7 +26,7 @@ export function Confirm() {
 
   const RegenerateHandler = () => {
     setImageUrl(undefined);
-    fetch(`/api/posts/${parentId}`)
+    fetch(`${API_ADDRESS}/posts/${parentId}`)
       .then((res) => res.json())
       .then((data) => {
         mutate(data);
@@ -35,7 +35,7 @@ export function Confirm() {
 
   const editRequest = async (data) => {
     const req = {
-      image: data.image_url,
+      image: data.imageUrl,
       source: {
         title: data.title,
         color: data.color,
@@ -67,7 +67,7 @@ export function Confirm() {
   useEffect(() => {
     if (parentId) {
       setImageUrl(undefined); // todo: 지원님께 여쭤보기
-      fetch(`/api/posts/${parentId}`)
+      fetch(`${API_ADDRESS}/posts/${parentId}`)
         .then((res) => res.json())
         .then((data) => {
           mutate(data);

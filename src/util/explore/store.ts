@@ -41,8 +41,8 @@ export const useExploreScrollStore = create(
 );
 
 interface IExploreListStore {
-  clothes: { id: number; image_url: string }[];
-  setClothes: (data: { id: number; image_url: string }[]) => void;
+  clothes: { id: number; imageUrl: string }[];
+  setClothes: (data: { id: number; imageUrl: string }[]) => void;
 }
 
 export const useExploreListStore = create(

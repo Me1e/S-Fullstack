@@ -32,7 +32,7 @@ export function InfiniteClothesList({
   bottom: LegacyRef<HTMLElement>;
   clothesList: {
     id: number;
-    image_url: string;
+    imageUrl: string;
   }[];
   getClothesList: (value: Sort) => void;
   dependencies?;
@@ -65,7 +65,7 @@ export function InfiniteClothesList({
       <Container>
         {clothesList.map((v, i) => (
           <Clothes
-            url={v.image_url ? AWS_ADDRESS + '/' + v.image_url : ''}
+            url={v.imageUrl ? AWS_ADDRESS + '/' + v.imageUrl : ''}
             id={v.id}
             onClick={() => setScrollY(window.scrollY)}
             key={i}

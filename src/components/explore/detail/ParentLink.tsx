@@ -48,7 +48,7 @@ export default function ParentLink({ post }: { post: Post }) {
   return (
     <Container onClick={() => router.push('/explore/detail/' + post.id)}>
       <Img
-        src={post.image_url ? AWS_ADDRESS + '/' + post.image_url : ''}
+        src={post.imageUrl ? AWS_ADDRESS + '/' + post.imageUrl : ''}
         alt=''
         width={120}
         height={120}

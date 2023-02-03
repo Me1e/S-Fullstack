@@ -3,6 +3,7 @@ import { InfiniteClothesList } from '@/components/@Common/InfiniteScrollView';
 import { Sort } from '@/components/@Common/InfiniteScrollView/SortContainer';
 import { TopBar } from '@/components/explore/TopBar';
 import { ForceCsr } from '@/components/ForceCsr';
+import { API_ADDRESS } from '@/const';
 import {
   useExploreKeywordStore,
   useExploreListStore,
@@ -30,12 +31,12 @@ export default function Explore() {
 
   const getClothesList = (value: Sort) => {
     const params =
-      value == '최신순' ? { page: page } : { page: page, sort_by: 'like' };
+      value == '최신순' ? { page: page } : { page: page, sortBy: 'like' };
 
     if (keyword && keyword != '') Object.assign(params, { search: keyword });
 
     axios
-      .get('/api/posts', {
+      .get(API_ADDRESS + '/posts', {
         params: params,
       })
       .then((res) => {

@@ -8,15 +8,19 @@ import {
   InfoWrapper,
   UsernameExpanded,
 } from './ExpandedUserInfo.style';
+import { API_ADDRESS } from '@/const';
 
 const ExpandedUserInfo = ({ username }: UserProps) => {
   const { id } = useUserInfoStore();
 
   const getLikes = async () => {
-    return fetch(`/api/users/${id}/like`).then((res) => res.json());
+    return fetch(`${API_ADDRESS}/users/${id}/like`).then((res) => res.json());
   };
 
-  const { data, isSuccess } = useQuery(['/api/users/:id/like'], getLikes);
+  const { data, isSuccess } = useQuery(
+    [API_ADDRESS + '/users/:id/like'],
+    getLikes
+  );
 
   return (
     <ExpandedUserInfoWrapper>

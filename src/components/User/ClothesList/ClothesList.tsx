@@ -3,7 +3,7 @@ import SortContainer, {
   Sort,
 } from '@/components/@Common/InfiniteScrollView/SortContainer';
 import { useObserver } from '@/components/@Common/InfiniteScrollView/useObserver';
-import { AWS_ADDRESS } from '@/const';
+import { API_ADDRESS, AWS_ADDRESS } from '@/const';
 import { useClosetScrollStore, useClosetSortStore } from '@/util/closet/store';
 import { useUserInfoStore } from '@/util/store';
 import styled from '@emotion/styled';
@@ -26,7 +26,7 @@ export const ClothesListWrapper = styled.div`
 export function ClothesList({ bottom }: { bottom: LegacyRef<HTMLElement> }) {
   const { sort, setSort } = useClosetSortStore();
   const page = useRef(1);
-  const [clothes, setClothes] = useState<{ id: number; image_url: string }[]>(
+  const [clothes, setClothes] = useState<{ id: number; imageUrl: string }[]>(
     []
   );
   const { scrollY, setScrollY } = useClosetScrollStore();
@@ -46,10 +46,10 @@ export function ClothesList({ bottom }: { bottom: LegacyRef<HTMLElement> }) {
   const getPosts = (value: Sort) => {
     const params =
       value == '최신순'
-        ? { page: page.current, user_id: userId }
-        : { page: page.current, sort_by: 'like', user_id: userId };
+        ? { page: page.current, userId: userId }
+        : { page: page.current, sortBy: 'like', userId: userId };
     axios
-      .get('/api/posts', {
+      .get(API_ADDRESS + '/posts', {
         params: params,
       })
       .then((res) => {
@@ -71,7 +71,7 @@ export function ClothesList({ bottom }: { bottom: LegacyRef<HTMLElement> }) {
       <ClothesContainer>
         {clothes.map((v, i) => (
           <Clothes
-            url={v.image_url ? AWS_ADDRESS + '/' + v.image_url : ''}
+            url={v.imageUrl ? AWS_ADDRESS + '/' + v.imageUrl : ''}
             id={v.id}
             onClick={() => setScrollY(window.scrollY)}
             key={i}

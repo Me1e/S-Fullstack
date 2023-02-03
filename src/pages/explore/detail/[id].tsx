@@ -7,18 +7,19 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useGenerateStore, useUserInfoStore } from '@/util/store';
+import { API_ADDRESS } from '@/const';
 
 type PostRes = PostType & {
   parent: {
     id: number;
-    image_url: string;
+    imageUrl: string;
     title: string;
     color: string;
     desc: string;
     caption: string;
-    parent_id: number;
-    user_id: number;
-    like_count: number;
+    parentId: number;
+    userId: number;
+    likeCount: number;
   };
   user: {
     id: number;
@@ -39,12 +40,12 @@ export default function Detail() {
   useEffect(() => {
     resetAll();
     if (id) {
-      axios.get('/api/posts/' + id).then((res) => setPost(res.data));
+      axios.get(API_ADDRESS + '/posts/' + id).then((res) => setPost(res.data));
       axios
-        .get('/api/posts/' + id + '/children')
+        .get(API_ADDRESS + '/posts/' + id + '/children')
         .then((res) => setChild(res.data));
       axios
-        .get('/api/posts/' + id + '/like?user_id=' + userId)
+        .get(API_ADDRESS + '/posts/' + id + '/like?userId=' + userId)
         .then((res) => setLike(res.data.isLiked));
     }
   }, [id]);

@@ -1,4 +1,4 @@
-import { AWS_ADDRESS } from '@/const';
+import { API_ADDRESS, AWS_ADDRESS } from '@/const';
 import IPostPostReqDto from '@/types/PostPost.types';
 import { useExploreListStore, useExplorePageStore } from '@/util/explore/store';
 import { useGenerateStore, useUserInfoStore } from '@/util/store';
@@ -31,7 +31,7 @@ export function Last() {
     useGenerateStore();
 
   const postHandler = async (data: IPostPostReqDto) => {
-    return fetch(`/api/posts`, {
+    return fetch(`${API_ADDRESS}/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
