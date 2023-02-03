@@ -1,13 +1,10 @@
+import useResetClothesList from '@/components/explore/useResetClothesList';
 import { AWS_ADDRESS } from '@/const';
 import {
-  useExploreKeywordStore,
-  useExploreListStore,
-  useExplorePageStore,
   useExploreScrollStore,
   useExploreSortStore,
 } from '@/util/explore/store';
 import styled from '@emotion/styled';
-import axios from 'axios';
 import { LegacyRef, useEffect } from 'react';
 import Clothes from './Clothes';
 import SortContainer, { Sort } from './SortContainer';
@@ -22,69 +19,51 @@ export const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-export const ClothesListContainerWrapper = styled.div`
+export const InfiniteScrollViewWrapper = styled.div`
   background-color: #f9f9f9;
 `;
 
-export default function ClothesListContainer({
+export function InfiniteClothesList({
   bottom,
+  clothesList,
+  getClothesList,
+  dependencies,
 }: {
   bottom: LegacyRef<HTMLElement>;
+  clothesList: {
+    id: number;
+    image_url: string;
+  }[];
+  getClothesList: (value: Sort) => void;
+  dependencies?;
 }) {
-  const { page, setPage } = useExplorePageStore();
   const { scrollY, setScrollY } = useExploreScrollStore();
   const { sort, setSort } = useExploreSortStore();
-  const { clothes, setClothes } = useExploreListStore();
-  const { keyword } = useExploreKeywordStore();
+  const resetClothesList = useResetClothesList();
 
   useEffect(() => {
     if (scrollY !== 0) window.scrollTo(0, scrollY);
   }, []);
 
-  useEffect(() => {
-    if (clothes.length == 0 && keyword.length == 0) {
-      if (page != 1) setPage(1);
-    }
-  }, [clothes.length, keyword]);
-
   const onClickSort = (value: Sort) => {
     setSort(value);
-    setPage(1);
-    setClothes([]);
-    getPosts(value);
+    resetClothesList();
+    getClothesList(value);
   };
 
-  const getPosts = (value: Sort) => {
-    const params =
-      value == '최신순' ? { page: page } : { page: page, sort_by: 'like' };
-
-    if (keyword && keyword != '') Object.assign(params, { search: keyword });
-
-    axios
-      .get('/api/posts', {
-        params: params,
-      })
-      .then((res) => {
-        if (res.data.length > 0) {
-          setClothes(clothes.concat(...res.data));
-          setPage(page + 1);
-        }
-      });
-  };
-
-  const onIntersect = ([entry]) => entry.isIntersecting && getPosts(sort);
+  const onIntersect = ([entry]) => entry.isIntersecting && getClothesList(sort);
 
   useObserver({
     target: bottom,
     onIntersect,
-    dependencies: { keyword, clothes, page },
+    dependencies: dependencies,
   });
 
   return (
-    <ClothesListContainerWrapper>
+    <InfiniteScrollViewWrapper>
       <SortContainer sort={sort} onChange={onClickSort} />
       <Container>
-        {clothes.map((v, i) => (
+        {clothesList.map((v, i) => (
           <Clothes
             url={v.image_url ? AWS_ADDRESS + '/' + v.image_url : ''}
             id={v.id}
@@ -100,6 +79,6 @@ export default function ClothesListContainer({
           />
         ))}
       </Container>
-    </ClothesListContainerWrapper>
+    </InfiniteScrollViewWrapper>
   );
 }

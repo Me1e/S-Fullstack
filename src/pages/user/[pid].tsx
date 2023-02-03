@@ -1,4 +1,4 @@
-import { BottomTabsNavigator } from '@/components/BottomTabsNavigator';
+import { BottomTabsNavigator } from '@/components/@Common/BottomTabsNavigator';
 import User from '@/components/User';
 import { useRouter } from 'next/router';
 

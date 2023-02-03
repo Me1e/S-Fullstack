@@ -1,4 +1,4 @@
-import { BottomTabsNavigator } from '@/components/BottomTabsNavigator';
+import { BottomTabsNavigator } from '@/components/@Common/BottomTabsNavigator';
 import ClothesListContainer from '@/components/explore/ClothesListContainer';
 import { TopBar } from '@/components/explore/TopBar';
 import { ForceCsr } from '@/components/ForceCsr';

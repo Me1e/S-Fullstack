@@ -1,4 +1,4 @@
-import { BottomTabsNavigator } from '@/components/BottomTabsNavigator';
+import { BottomTabsNavigator } from '@/components/@Common/BottomTabsNavigator';
 import Child from '@/components/explore/detail/Child';
 import DetailPageHeader from '@/components/explore/detail/Header';
 import Parent from '@/components/explore/detail/Parent';

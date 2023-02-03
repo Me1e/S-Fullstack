@@ -1,4 +1,4 @@
-import { BottomTabsNavigator } from '@/components/BottomTabsNavigator';
+import { BottomTabsNavigator } from '@/components/@Common/BottomTabsNavigator';
 import { ForceCsr } from '@/components/ForceCsr';
 import User from '@/components/User';
 import { useUserInfoStore } from '@/util/store';

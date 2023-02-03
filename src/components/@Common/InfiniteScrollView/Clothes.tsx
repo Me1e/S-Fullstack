@@ -19,19 +19,6 @@ export default function Clothes({
   style?: CSSProperties;
   onClick?: () => void;
 }) {
-  // const target = useRef(null); // 대상 ref
-  // const [visible, setVisible] = useState(false); // DOM을 렌더할 조건
-
-  // // isIntersecting의 경우에 DOM을 마운트 한다.
-  // const onIntersect = ([entry]) =>
-  //   entry.isIntersecting ? setVisible(true) : setVisible(false);
-
-  // useObserver({
-  //   target,
-  //   onIntersect,
-  //   threshold: 0.1, // 화면 양끝에서 10%만 보여져도 onIntersect를 실행한다.
-  // });
-
   return (
     <Link href={'/explore/detail/' + id} onClick={onClick} style={style}>
       {true && (
