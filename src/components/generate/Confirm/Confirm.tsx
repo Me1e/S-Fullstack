@@ -1,4 +1,4 @@
-import { AI_ADDRESS, API_ADDRESS, AWS_ADDRESS } from '@/const';
+import { API_ADDRESS, AWS_ADDRESS } from '@/const';
 import { useGenerateStore } from '@/util/store';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -49,8 +49,8 @@ export function Confirm() {
     };
     console.log(req);
 
-    return fetch(`${AI_ADDRESS}/v2/edit`, {
-      method: 'POST',
+    return fetch(`${API_ADDRESS}/ai`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -14,7 +14,7 @@ import {
   SelectWrapper,
 } from './Select.styles';
 import { useMutation } from '@tanstack/react-query';
-import { AI_ADDRESS, AWS_ADDRESS } from '@/const';
+import { API_ADDRESS, AWS_ADDRESS } from '@/const';
 import { useEffect } from 'react';
 import * as LottieData from '@/../public/ai-loading.json';
 import Lottie from 'lottie-react';
@@ -34,7 +34,7 @@ export function Select() {
   } = useGenerateStore();
 
   const generateRequest = async () => {
-    return fetch(`${AI_ADDRESS}/v2/generate`, {
+    return fetch(`${API_ADDRESS}/ai`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
