@@ -1,6 +1,8 @@
-import Clothes from '@/components/explore/Clothes';
-import SortContainer, { Sort } from '@/components/explore/SortContainer';
-import { useObserver } from '@/components/explore/useObserver';
+import Clothes from '@/components/@Common/InfiniteScrollView/Clothes';
+import SortContainer, {
+  Sort,
+} from '@/components/@Common/InfiniteScrollView/SortContainer';
+import { useObserver } from '@/components/@Common/InfiniteScrollView/useObserver';
 import { AWS_ADDRESS } from '@/const';
 import { useClosetScrollStore, useClosetSortStore } from '@/util/closet/store';
 import { useUserInfoStore } from '@/util/store';

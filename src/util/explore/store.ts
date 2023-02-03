@@ -1,4 +1,4 @@
-import { Sort } from '@/components/explore/SortContainer';
+import { Sort } from '@/components/@Common/InfiniteScrollView/SortContainer';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
