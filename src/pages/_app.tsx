@@ -1,3 +1,4 @@
+import { SessionProvider } from 'next-auth/react';
 import localFont from '@next/font/local';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
@@ -11,10 +12,12 @@ const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <main className={pretendard.className}>
-        <Component {...pageProps} />
-      </main>
-    </QueryClientProvider>
+    <SessionProvider session={pageProps.session}>
+      <QueryClientProvider client={queryClient}>
+        <main className={pretendard.className}>
+          <Component {...pageProps} />
+        </main>
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }
